@@ -1,0 +1,178 @@
+//my exercise
+D:\Sample Projects\gitPro>git init
+Initialized empty Git repository in D:/Sample Projects/gitPro/.git/
+
+D:\Sample Projects\gitPro>git status
+# On branch master
+#
+# Initial commit
+#
+nothing to commit (create/copy files and use "git add" to track)
+
+D:\Sample Projects\gitPro>git status
+# On branch master
+#
+# Initial commit
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#       readme.txt
+nothing added to commit but untracked files present (use "git add" t
+
+D:\Sample Projects\gitPro>git add readme.txt
+
+D:\Sample Projects\gitPro>git status
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#       new file:   readme.txt
+#
+
+D:\Sample Projects\gitPro>git reset
+fatal: Failed to resolve 'HEAD' as a valid ref.
+
+D:\Sample Projects\gitPro>git reset HEAD
+fatal: ambiguous argument 'HEAD': unknown revision or path not in th
+ee.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+
+D:\Sample Projects\gitPro>git reset 'HEAD'
+fatal: ambiguous argument ''HEAD'': unknown revision or path not in
+tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+
+D:\Sample Projects\gitPro>git status
+# On branch master
+#
+# Initial commit
+#
+# Changes to be committed:
+#   (use "git rm --cached <file>..." to unstage)
+#
+#       new file:   readme.txt
+#
+
+D:\Sample Projects\gitPro>git commit -m "readme file is added"
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'EMD021@EMD021-PC.(n
+
+D:\Sample Projects\gitPro>git config --global username
+error: key does not contain a section: username
+
+D:\Sample Projects\gitPro>git config --global user.email "username"
+
+D:\Sample Projects\gitPro>git config --global user.email "username@u
+
+D:\Sample Projects\gitPro>git config --global user.name "username"
+
+D:\Sample Projects\gitPro>git commit -m "readme file is added"
+[master (root-commit) bf8cb2b] readme file is added
+ 1 file changed, 1 insertion(+)
+ create mode 100644 readme.txt
+
+D:\Sample Projects\gitPro>git status
+# On branch master
+nothing to commit, working directory clean
+
+D:\Sample Projects\gitPro>git log
+WARNING: terminal is not fully functional
+ commit bf8cb2b825e5f5b0d1ac173e8dfa26e8b5a2f451
+Author: username <username@user.com>
+Date:   Mon Aug 10 02:41:15 2015 -0400
+
+    readme file is added
+
+D:\Sample Projects\gitPro>git diff
+WARNING: terminal is not fully functional
+   (press RETURN)
+D:\Sample Projects\gitPro>git diff HEAD
+WARNING: terminal is not fully functional
+   (press RETURN)
+D:\Sample Projects\gitPro>git checkout -- readme.txt
+
+D:\Sample Projects\gitPro>git reset
+
+D:\Sample Projects\gitPro>git brance trail
+git: 'brance' is not a git command. See 'git --help'.
+
+Did you mean this?
+        branch
+
+D:\Sample Projects\gitPro>git branch trail
+
+D:\Sample Projects\gitPro>git branck
+git: 'branck' is not a git command. See 'git --help'.
+
+Did you mean this?
+        branch
+
+D:\Sample Projects\gitPro>git branch
+* master
+  trail
+
+D:\Sample Projects\gitPro>git checkout trail
+Switched to branch 'trail'
+
+D:\Sample Projects\gitPro>git status
+# On branch trail
+nothing to commit, working directory clean
+
+D:\Sample Projects\gitPro>git rm readme.txt
+rm 'readme.txt'
+
+D:\Sample Projects\gitPro>git status
+# On branch trail
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       deleted:    readme.txt
+#
+
+D:\Sample Projects\gitPro>git commit -m "files are removed"
+[trail 2779eef] files are removed
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 readme.txt
+
+D:\Sample Projects\gitPro>git checkout master
+Switched to branch 'master'
+
+D:\Sample Projects\gitPro>git status
+# On branch master
+nothing to commit, working directory clean
+
+D:\Sample Projects\gitPro>git merge trail
+Updating bf8cb2b..2779eef
+Fast-forward
+ readme.txt | 1 -
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 readme.txt
+
+D:\Sample Projects\gitPro>git branch
+* master
+  trail
+
+D:\Sample Projects\gitPro>git branch -d trail
+Deleted branch trail (was 2779eef).
+
+D:\Sample Projects\gitPro>git branch
+* master
+
+D:\Sample Projects\gitPro>git branch -d master
+error: Cannot delete the branch 'master' which you are currently on.
