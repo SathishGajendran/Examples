@@ -1,0 +1,26 @@
+{
+  "name": "HelloWorld",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "ejs": "^2.3.3",
+    "express": "~3.4.4"
+  },
+  "private": true,
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "ISC",
+  "description": "The OpenShift `nodejs` cartridge documentation can be found at:",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "ssh://55d46ef52d5271c222000179@helloworld-sathishg.rhcloud.com/~/git/helloworld.git/"
+  },
+  "author": "Sathish G. (sathish.gajendran@gmail.com)"
+}
