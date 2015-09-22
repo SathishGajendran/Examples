@@ -1,0 +1,16 @@
+{
+  "name": "d3js",
+  "version": "1.0.0",
+  "description": "D3JS",
+  "main": "app.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sathish G. (sathish.gajendran@gmail.com)",
+  "license": "ISC"
+}
