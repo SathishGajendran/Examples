@@ -4,44 +4,10 @@
 		<meta charset="utf-8">
 		<title>D3JS</title>
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-		<style type="text/css">
-			.bar{
-			margin-bottom: 5px;
-			background-color: #E4FF00;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="stylesheets/main.css"></style>		
 	</head>
 	
-	<body>
-		<script>
-			var list = function draw(err, data) {
-				d3.select("body")
-					.append("ul")
-					.selectAll("li")
-					.data(data)
-					.enter()
-					.append('li')
-					.text(function(d) {
-						return "year : " + d.year + ", " + "sale: " + d.sale;
-					});
-			};
-			var barChart = function barChart(err, data) {
-				d3.select("body")
-					.append("div").attr("class", "barChart")
-					.selectAll(".bar")
-					.data(data)
-					.enter()
-					.append("div").attr("class", "bar")
-					.style("width", function(d) {
-						return d.sale + "px"
-					})
-					.style("outline", "1px solid black")
-					.text(function(d) {
-						return d.sale
-					});
-			};
-			//d3.json("/data", list);
-			d3.json("/data", barChart);
-		</script>
+	<body>	
+		<script src="javascripts/main.js"></script>
 	</body>
 </html>

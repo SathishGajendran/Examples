@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>D3JSLINE</title>		
+		<title>D3JSLINE</title>
 		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		<style type="text/css">
 			.axis path {
@@ -50,7 +50,7 @@
 			"year": "2008"
 		}, {
 			"sale": "76",
-					"year": "2009"
+			"year": "2009"
 		}, {
 			"sale": "87",
 			"year": "2010"
@@ -84,22 +84,34 @@
 				return yScale(d.sale)
 			})
 			.interpolate('basis');
-		var drawLineChart = function(data){
-			d3.select("#chartArea  > path").transition()
-			.attr('d', lineGen(data))
+		var drawLineChart = function(data) {
+			d3.select("#chartArea  > path")
+				.transition()
+				.attr('d', lineGen(data))
 		};
 		drawLineChart(data);
 		var updataData = function() {
-			data.forEach(function(d, i) {
-				d.sale = Math.floor((Math.random() * 100) + 1);
-			});
+			// data.forEach(function(d, i) {
+			// 	d.sale = Math.floor((Math.random() * 100) + 1);
+			// });
+			for (var i = 0; i < data.length - 1; i++) {
+				data[i].sale = data[i + 1].sale;
+			}
+			data[data.length - 1].sale = Math.floor((Math.random() * 100) + 1);
 			drawLineChart(data);
 		};
-		var animata = function(){
-			setInterval(function(){
+		var animata = function() {
+			// updataData();
+			// requestAnimationFrame(animata);
+
+			setInterval(function() {
 				updataData();
-			},300);
-		}
+			}, 300);
+		};
+
+		document.getElementById('chartArea').onmousedown = function() {
+			data[data.length - 1].sale = 100;
+		};
 	</script>
 </body>
 </html>

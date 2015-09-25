@@ -70,7 +70,7 @@ app.get('/data', function(req, res) {
 		"sale": "87",
 		"year": "2010"
 	}];
-	res.type('application/json').send(data);
+	res.send(data);
 });
 
 
