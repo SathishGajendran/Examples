@@ -1,0 +1,7 @@
+eval $(ssh-agent)
+
+ssh-add path to key
+
+
+$ git config --global user.name "Sathish G"
+$ git config --global user.email "sathish.gajendran@gmail.com"
