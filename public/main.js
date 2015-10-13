@@ -49,14 +49,18 @@ app.controller('appCtrl', ['$scope', '$rootScope', '$location', function($scope,
 
 	$rootScope.$on('$locationChangeStart', function(next, current) {
 		var key = current.split('#/')[1];
-		document.getElementById('display').classList.add('hide');
-		document.getElementById('disLoad').classList.remove('hide');
-		var display = document.getElementById('disArea');
-		var srcUrl = $scope.links[key];
-		if (srcUrl) {
-			display.src = srcUrl
+		if (key) {
+			document.getElementById('display').classList.add('hide');
+			document.getElementById('disLoad').classList.remove('hide');
+			var display = document.getElementById('disArea');
+			var srcUrl = $scope.links[key];
+			if (srcUrl) {
+				display.src = srcUrl
+			} else {
+				alert("Url is Incorrect!!!");
+			}
 		} else {
-			alert("Url is Incorrect!!!");
+			$location.path('AngularJs');
 		}
 	});
 
