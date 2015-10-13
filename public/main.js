@@ -65,7 +65,9 @@ app.controller('appCtrl', ['$scope', '$rootScope', '$location', function($scope,
 	});
 
 	$scope.liElClick = function(event, key) {
-		$location.path(key);
+		if (event === null ? true : event.target.tagName !== "SPAN" ? true : false) {
+			$location.path(key);
+		}
 	};
 
 }]);
