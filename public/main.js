@@ -41,7 +41,7 @@ app.controller('appCtrl', ['$scope', '$rootScope', '$location', function($scope,
 		AngularJs: 'http://sathishgajendran.github.io/HelloWorld/Angular.html',
 		ExtJS: 'http://sathishgajendran.github.io/HelloWorld/customPaint.html',
 		BackboneJS: 'http://sathishgajendran.github.io/HelloWorld/BackBone.html',
-		D3JS: 'http://sathishgajendran.github.io/HelloWorld/d3jsLine.html',
+		D3JS: 'http://sathishgajendran.github.io/HelloWorld/d3js.html',
 		jqGrid: 'http://sathishgajendran.github.io/HelloWorld/jqGrid.html',
 		SignPanel: 'http://sathishgajendran.github.io/HelloWorld/sign.html',
 		Flames: 'http://sathishgajendran.github.io/HelloWorld/Flames.html'
