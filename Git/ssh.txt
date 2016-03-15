@@ -5,3 +5,11 @@ ssh-add path to key
 
 $ git config --global user.name "Sathish G"
 $ git config --global user.email "sathish.gajendran@gmail.com"
+
+
+git clone <your-external-repo-url>
+//change to newly cloned git directory
+git remote add openshift -f <openshift-git-repo-url>
+git merge openshift/master -s recursive -X ours
+
+git push openshift master
