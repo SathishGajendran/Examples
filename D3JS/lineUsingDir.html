@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Line Chart</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>		
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+		<style type="text/css">
+			.axis path {
+			fill: none;
+			stroke: #777;
+			shape-rendering: crispEdges;
+			}
+			.axis text {
+			font-family: Lato;
+			font-size: 13px;
+			}
+
+			.title{
+				color:white;
+			}
+		</style>
+	</head>
+	<body ng-controller="appCtrl">
+		<svg width="1000" height="500" axis ng-repeat="page in ['A','B','C','D','F']">
+			<text x="400" y="50" class="title">{{page| uppercase}}</text>
+			<line-chart width="1000" height="500" stroke="violet" stroke-width="2" fill="none" cls="classA" page="{{page}}">
+			</line-chart>
+			<line-chart width="1000" height="500" stroke="blue" stroke-width="2" fill="none" cls="classB"  page="{{page}}">
+			</line-chart>
+		</svg>
+
+		<!-- <svg width="1000" height="500" axis>
+			<text x="400" y="50" class="title">Home</text>
+			<line-chart width="1000" height="500" stroke="violet" stroke-width="2" fill="none" cls="classA" page="home">
+			</line-chart>
+			<line-chart width="1000" height="500" stroke="blue" stroke-width="2" fill="none" cls="classB"  page="home">
+			</line-chart> -->
+			<!-- <line-chart width="1000" height="500" stroke="green" stroke-width="2" fill="none" data="total"></line-chart>
+			<line-chart width="1000" height="500" stroke="yellow" stroke-width="2" fill="none" data="home"></line-chart>			
+			<line-chart width="1000" height="500" stroke="orange" stroke-width="2" fill="none" data="message"></line-chart>
+			<line-chart width="1000" height="500" stroke="red" stroke-width="2" fill="none" data="courses"></line-chart> -->
+		<!-- </svg>
+		<svg width="1000" height="500" axis>
+			<text x="400" y="50" class="title">Grade Book</text>
+			<line-chart width="1000" height="500" stroke="violet" stroke-width="2" fill="none" cls="classA" page="gradebook">
+			</line-chart>
+			<line-chart width="1000" height="500" stroke="blue" stroke-width="2" fill="none" cls="classB"  page="gradebook">
+			</line-chart>			
+		</svg>
+		<svg width="1000" height="500" axis>
+			<text x="400" y="50" class="title">Courses</text>
+			<line-chart width="1000" height="500" stroke="violet" stroke-width="2" fill="none" cls="classA" page="courses">
+			</line-chart>
+			<line-chart width="1000" height="500" stroke="blue" stroke-width="2" fill="none" cls="classB"  page="courses">
+			</line-chart>
+		</svg>
+		<svg width="1000" height="500" axis>
+			<text x="400" y="50" class="title">Message</text>
+			<line-chart width="1000" height="500" stroke="violet" stroke-width="2" fill="none" cls="classA" page="message">
+			</line-chart>
+			<line-chart width="1000" height="500" stroke="blue" stroke-width="2" fill="none" cls="classB"  page="message">
+			</line-chart>
+		</svg>
+		<svg width="1000" height="500" axis>
+			<text x="400" y="50" class="title">Settings</text>
+			<line-chart width="1000" height="500" stroke="violet" stroke-width="2" fill="none" cls="classA" page="settings">
+			</line-chart>
+			<line-chart width="1000" height="500" stroke="blue" stroke-width="2" fill="none" cls="classB"  page="settings">
+			</line-chart>
+		</svg> -->		
+		<script>
+			var app = angular.module('app', ['ngRoute']);
+			app.controller('appCtrl', function($scope,$http) {
+				// $http.get("/data").then(function(res){
+				// 	var data=res.data.classA;
+				// 	var dataList=[];
+				// 	data.forEach(function(el,i){
+				// 		dataList.push({
+				// 			x:i,
+				// 			y:el.settings
+				// 		});
+				// 	});
+				// 	$scope.data=dataList;
+
+				// });
+				$scope.data = [{
+					"sale": "23",
+					"year": "0"
+				}, {
+					"sale": "45",
+					"year": "1"
+				}, {
+					"sale": "97",
+					"year": "2"
+				}, {
+					"sale": "56",
+					"year": "3"
+				}, {
+					"sale": "87",
+					"year": "4"
+				}, {
+					"sale": "97",
+					"year": "5"
+				}, {
+					"sale": "56",
+					"year": "6"
+				}, {
+					"sale": "37",
+					"year": "7"
+				}, {
+					"sale": "47",
+					"year": "8"
+				}, {
+					"sale": "76",
+					"year": "9"
+				}, {
+					"sale": "87",
+					"year": "10"
+				}];
+			});
+			app.directive('lineChart', function($http) {
+				return {
+					restrict: 'E',
+					link: function($scope, ele, attr) {
+						var dataList=[];
+						$http.get("/data").then(function(res){
+							var data=res.data[attr.cls];
+							
+							data.forEach(function(el,i){
+								dataList.push({
+									x:i,
+									y:el[attr.page]
+								});
+							});
+							// $scope.data=dataList;
+							// console.log(dataList);
+
+							var chartArea = d3.select(ele.parent()[0]),
+							WIDTH = attr.width,
+							HEIGHT = attr.height,
+							MARGINS = {
+								top: 20,
+								right: 20,
+								bottom: 20,
+								left: 60
+							},
+							yScaleLimit = d3.extent(dataList, function(d) { // returns [min,max]
+								return d.y;
+							}),
+							xScale = d3.scale.linear().range([MARGINS.left, WIDTH - MARGINS.right]).domain([0, 10]),
+							yScale = d3.scale.linear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([0,100000]),
+							xAxis = d3.svg.axis().scale(xScale),
+							yAxis = d3.svg.axis().scale(yScale).orient("left");
+
+						var line=chartArea.append("svg:path");
+						line.attr("stroke", attr.stroke)
+							.attr("stroke-width", attr.strokeWidth)
+							.attr("fill", attr.fill);
+
+						
+						var lineGen = d3.svg.line()
+							.x(function(d) {
+								return xScale(d.x)
+							})
+							.y(function(d) {
+								return yScale(d.y)
+							})
+							// .interpolate('basis');
+						line.transition()
+							.attr('d', lineGen(dataList));
+						});							
+					}
+				};
+			});
+
+			app.directive('axis', function() {
+				return {
+					restrict: 'A',
+					link: function($scope, ele, attr) {
+						var element = d3.select(ele[0]);
+						var MARGINS = {
+								top: 20,
+								right: 20,
+								bottom: 20,
+								left: 60
+							},
+							// yScaleLimit = d3.extent(dataList, function(d) { // returns [min,max]
+							// 	return d.y;
+							// }),
+							xScale = d3.scale.linear().range([MARGINS.left, attr.width - MARGINS.right]).domain([0, 10]),
+							yScale = d3.scale.linear().range([attr.height - MARGINS.top, MARGINS.bottom]).domain([0,100000]),
+							xAxis = d3.svg.axis().scale(xScale);
+							yAxis = d3.svg.axis().scale(yScale).orient("left");
+						element.append("svg:g")
+							.attr("class", "axis")
+							.attr("transform", "translate(0," + (attr.height - MARGINS.bottom) + ")")
+							.call(xAxis);
+						element.append("svg:g")
+							.attr("class", "axis")
+							.attr("transform", "translate(" + (MARGINS.left) + ",0)")
+							.call(yAxis);
+					}
+				}
+			});
+			angular.bootstrap(document, ['app']);
+		</script>
+	</body>
+</html>
