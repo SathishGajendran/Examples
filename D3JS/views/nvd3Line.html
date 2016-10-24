@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Home</title>
+		
+	</head>
+	
+	<body>
+		<div id="chart"><svg></svg></div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.js" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.css"></style>
+		<script>
+		nv.addGraph(function() {
+			var chart = nv.models.lineChart()
+				.margin({
+					left: 100
+				})
+				.useInteractiveGuideline(true)
+				// .transitionDuration(350)
+				.showLegend(false)
+				.showYAxis(true)
+				.showXAxis(true);
+			chart.xAxis
+				.axisLabel('X Axis')
+				.tickFormat(d3.format(',r'));
+			chart.yAxis
+				.axisLabel('Y Axis')
+				.tickFormat(d3.format('.02f'));
+			var myData = [{
+				values: [{
+					x: 1,
+					y: 1
+				}, {
+					x: 2,
+					y: 2
+				}, {
+					x: 3,
+					y: 3
+				}],
+				key: 'line',
+				color: '#555'
+			}];
+			d3.select('#chart svg')
+				.datum(myData)
+				.call(chart);
+			nv.utils.windowResize(function() {
+				chart.update()
+			});
+			return chart;
+		});
+		</script>
+	</body>
+</html>
